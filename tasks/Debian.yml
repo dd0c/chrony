@@ -1,0 +1,8 @@
+---
+
+- name: Make sure chrony is present
+  ansible.builtin.apt:
+    pkg:
+      - chrony
+
+...
