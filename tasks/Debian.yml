@@ -5,4 +5,20 @@
     pkg:
       - chrony
 
+- name: Enable service chrony and ensure it is enabled not masked
+  ansible.builtin.systemd_service:
+    name: chrony.service
+    state: started
+    enabled: true
+    masked: no
+
+- name: Template default chrony config file to /etc/chrony/chrony.conf
+  ansible.builtin.template:
+    src: templates/etc/chrony/chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+    mode: '0644'
+    owner: root
+    group: root
+  notify: Restart chrony
+
 ...
